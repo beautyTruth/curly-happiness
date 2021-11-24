@@ -134,6 +134,14 @@ function resetBoard() {
   [firstCard, secondCard] = [null, null];
 }
 
+// IIFE example Immediately Invoked Function Expression ----- IMMEDIATELY AWAKENED FUNCTION
+(function shuffle() {
+  cards.forEach((card) => {
+    let randomPositions = Math.floor(Math.random() * 12);
+    card.style.order = randomPositions;
+  });
+})();
+
 cards.forEach((card) => {
   card.addEventListener("click", flipCard);
 });
