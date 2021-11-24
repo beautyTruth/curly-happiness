@@ -62,3 +62,6 @@ function resetBoard() {
 cards.forEach(function (card) {
   card.addEventListener("click", flipCard);
 });
+
+// fall down 7 times, get up 8
+// value yourself
