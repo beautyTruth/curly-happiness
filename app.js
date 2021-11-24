@@ -73,9 +73,12 @@ my code below
 const cards = document.querySelectorAll(".memory-card");
 
 let cardIsFlipped = false;
+let lockBoard = false;
 let firstCard, secondCard;
 
 function flipCard() {
+  if (lockBoard) return;
+
   // console.log(this); // read up on "this"
   // this.classList.toggle("flip");
   this.classList.add("flip");
@@ -84,13 +87,13 @@ function flipCard() {
     // first click and first card
     cardIsFlipped = true;
     firstCard = this;
-  } else {
-    // second click and second card
-    cardIsFlipped = false;
-    secondCard = this;
-
-    checkForMatch();
+    return;
   }
+  // second click and second card
+  cardIsFlipped = false;
+  secondCard = this;
+
+  checkForMatch();
 }
 
 function checkForMatch() {
@@ -114,9 +117,11 @@ function disableCards() {
 }
 
 function unFlipCards() {
+  lockBoard = true;
   setTimeout(() => {
     firstCard.classList.remove("flip");
     secondCard.classList.remove("flip");
+    lockBoard = false;
   }, 1500);
 }
 
