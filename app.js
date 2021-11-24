@@ -80,11 +80,15 @@ function flipCard() {
   this.classList.toggle("flip");
 
   if (!cardIsFlipped) {
+    // first click and first card
     cardIsFlipped = true;
     firstCard = this;
   } else {
+    // second click and second card
     cardIsFlipped = false;
     secondCard = this;
+
+    // check whether the cards match
   }
 }
 
