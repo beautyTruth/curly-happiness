@@ -76,8 +76,9 @@ let cardIsFlipped = false;
 let firstCard, secondCard;
 
 function flipCard() {
-  // console.log(this);
-  this.classList.toggle("flip");
+  // console.log(this); // read up on "this"
+  // this.classList.toggle("flip");
+  this.classList.add("flip");
 
   if (!cardIsFlipped) {
     // first click and first card
@@ -88,19 +89,35 @@ function flipCard() {
     cardIsFlipped = false;
     secondCard = this;
 
-    // check whether the cards match
-    if (firstCard.dataset.name === secondCard.dataset.name) {
-      // they match, so we want to disable the cards
-      firstCard.removeEventListener("click", flipCard);
-      secondCard.removeEventListener("click", flipCard);
-    } else {
-      // they do not match so we want to clip them back over
-      setTimeout(() => {
-        firstCard.classList.remove("flip");
-        secondCard.classList.remove("flip");
-      }, 1500);
-    }
+    checkForMatch();
   }
+}
+
+function checkForMatch() {
+  let isMatched = firstCard.dataset.name === secondCard.dataset.name;
+  isMatched ? disableCards() : unFlipCards();
+
+  //we're using the ternary operator to replace the below code in refactoring this function
+
+  // if (firstCard.dataset.name === secondCard.dataset.name) {
+  //   // they match, so we want to disable the cards
+  //   disableCards();
+  // } else {
+  //   // they do not match so we want to clip them back over
+  //   unFlipCards();
+  // }
+}
+
+function disableCards() {
+  firstCard.removeEventListener("click", flipCard);
+  secondCard.removeEventListener("click", flipCard);
+}
+
+function unFlipCards() {
+  setTimeout(() => {
+    firstCard.classList.remove("flip");
+    secondCard.classList.remove("flip");
+  }, 1500);
 }
 
 cards.forEach((card) => {
