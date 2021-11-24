@@ -89,6 +89,17 @@ function flipCard() {
     secondCard = this;
 
     // check whether the cards match
+    if (firstCard.dataset.name === secondCard.dataset.name) {
+      // they match, so we want to disable the cards
+      firstCard.removeEventListener("click", flipCard);
+      secondCard.removeEventListener("click", flipCard);
+    } else {
+      // they do not match so we want to clip them back over
+      setTimeout(() => {
+        firstCard.classList.remove("flip");
+        secondCard.classList.remove("flip");
+      }, 1500);
+    }
   }
 }
 
